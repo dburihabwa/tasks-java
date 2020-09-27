@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/task")
@@ -20,6 +21,11 @@ public class TaskController {
     @PostMapping
     public Task add(@RequestBody Task task) {
         return this.service.add(task);
+    }
+
+    @GetMapping("/{id}")
+    public Task get(@PathVariable String id) {
+        return this.service.get(UUID.fromString(id));
     }
 
     @GetMapping

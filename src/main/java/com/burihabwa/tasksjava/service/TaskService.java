@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TaskService {
@@ -19,6 +20,10 @@ public class TaskService {
 
     public Task add(Task task) {
         return this.taskDao.insert(task);
+    }
+
+    public Task get(UUID id) {
+        return this.taskDao.get(id);
     }
 
     public List<Task> list() {
