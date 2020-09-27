@@ -1,22 +1,20 @@
 package com.burihabwa.tasksjava.models;
 
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-@Document
 public class Task {
-    @Id
-    private String id;
+    private UUID id;
     private String title;
     private String description;
     private LocalDateTime start;
     private LocalDateTime finish;
     private boolean completed;
 
-    public Task(String id, String title, String description, LocalDateTime start, LocalDateTime finish, boolean completed) {
+    public Task(@JsonProperty("id") UUID id, @JsonProperty("title") String title, @JsonProperty("description") String description, LocalDateTime start, LocalDateTime finish, boolean completed) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -25,11 +23,11 @@ public class Task {
         this.completed = completed;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
