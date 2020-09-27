@@ -3,9 +3,7 @@ package com.burihabwa.tasksjava.dao;
 import com.burihabwa.tasksjava.models.Task;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Repository("fakeDAO")
 public class FakeTaskDAO implements TaskDAO {
@@ -22,5 +20,10 @@ public class FakeTaskDAO implements TaskDAO {
     @Override
     public Task get(UUID id) {
         return tasks.get(id);
+    }
+
+    @Override
+    public List<Task> list() {
+        return new ArrayList<>(tasks.values());
     }
 }
