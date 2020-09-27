@@ -1,7 +1,7 @@
-package com.burihabwa.tasksjava.service;
+package com.burihabwa.spring.tasks.service;
 
-import com.burihabwa.tasksjava.dao.TaskDAO;
-import com.burihabwa.tasksjava.models.Task;
+import com.burihabwa.spring.tasks.dao.TaskDAO;
+import com.burihabwa.spring.tasks.models.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

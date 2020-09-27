@@ -1,4 +1,4 @@
-package com.burihabwa.tasksjava.models;
+package com.burihabwa.spring.tasks.models;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

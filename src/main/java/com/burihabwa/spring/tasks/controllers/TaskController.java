@@ -1,7 +1,7 @@
-package com.burihabwa.tasksjava.controllers;
+package com.burihabwa.spring.tasks.controllers;
 
-import com.burihabwa.tasksjava.models.Task;
-import com.burihabwa.tasksjava.service.TaskService;
+import com.burihabwa.spring.tasks.models.Task;
+import com.burihabwa.spring.tasks.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

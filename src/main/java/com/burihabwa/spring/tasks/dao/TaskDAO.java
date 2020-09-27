@@ -1,6 +1,6 @@
-package com.burihabwa.tasksjava.dao;
+package com.burihabwa.spring.tasks.dao;
 
-import com.burihabwa.tasksjava.models.Task;
+import com.burihabwa.spring.tasks.models.Task;
 
 import java.util.List;
 import java.util.UUID;
