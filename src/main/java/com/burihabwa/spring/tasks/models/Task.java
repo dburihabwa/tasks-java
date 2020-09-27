@@ -1,20 +1,34 @@
 package com.burihabwa.spring.tasks.models;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Task {
+    @JsonProperty("id")
     private UUID id;
+
+    @JsonProperty("title")
     private String title;
+
+    @JsonProperty("description")
     private String description;
+
+    @JsonProperty("start")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime start;
+
+    @JsonProperty("finish")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime finish;
+
+    @JsonProperty("completed")
     private boolean completed;
 
-    public Task(@JsonProperty("id") UUID id, @JsonProperty("title") String title, @JsonProperty("description") String description, LocalDateTime start, LocalDateTime finish, boolean completed) {
+    public Task(UUID id, String title, String description, @JsonProperty("start") LocalDateTime start, @JsonProperty("finish") LocalDateTime finish, boolean completed) {
         this.id = id;
         this.title = title;
         this.description = description;
