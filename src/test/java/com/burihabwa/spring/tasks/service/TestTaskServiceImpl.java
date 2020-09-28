@@ -89,12 +89,44 @@ public class TestTaskServiceImpl {
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateExistingTaskFinishingBeforeStart() {
         TaskServiceImpl service = new TaskServiceImpl(new FakeTaskDAO());
-        Task task = new Task(null, "title", "description", LocalDateTime.now(),  LocalDateTime.now(), false);
+        Task task = new Task(null, "title", "description", LocalDateTime.now(), LocalDateTime.now(), false);
         Task newTask = service.add(task);
         LocalDateTime start = LocalDateTime.now();
         LocalDateTime finish = start.minusMinutes(1);
         newTask.setStart(start);
         newTask.setFinish(finish);
         service.update(newTask.getId(), newTask);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateExistingTaskWithoutIdUpdatesTask() {
+        TaskServiceImpl service = new TaskServiceImpl(new FakeTaskDAO());
+        Task task = new Task(null, "title", "description", LocalDateTime.now(), LocalDateTime.now(), false);
+        Task newTask = service.add(task);
+        LocalDateTime start = LocalDateTime.now();
+        LocalDateTime finish = start.minusMinutes(1);
+        newTask.setStart(start);
+        newTask.setFinish(finish);
+        service.update(newTask.getId(), newTask);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateExistingTaskWithIdMismatch() {
+        TaskServiceImpl service = new TaskServiceImpl(new FakeTaskDAO());
+        Task task = new Task(null, "title", "description", LocalDateTime.now(), LocalDateTime.now(), false);
+        Task newTask = service.add(task);
+        service.update(UUID.randomUUID(), newTask);
+    }
+
+    @Test
+    public void testUpdateSetsIdWhenNull() {
+        TaskServiceImpl service = new TaskServiceImpl(new FakeTaskDAO());
+        Task task = new Task(null, "title", "description", LocalDateTime.now(), LocalDateTime.now(), false);
+        Task newTask = service.add(task);
+        UUID originalId = newTask.getId();
+        newTask.setId(null);
+        Assert.assertNull(newTask.getId());
+        Task modifiedTask = service.update(originalId, newTask);
+        Assert.assertEquals(originalId, modifiedTask.getId());
     }
 }

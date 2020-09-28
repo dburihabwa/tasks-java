@@ -50,6 +50,10 @@ public class TaskServiceImpl implements TaskService {
         if (!hasValidDates(task)) {
             throw new IllegalArgumentException("Task finishes before it starts");
         }
+        if (task.getId() != null && !id.equals(task.getId())) {
+            throw new IllegalArgumentException("id parameter does not match task.getId()");
+        }
+        task.setId(id);
         return this.taskDao.update(id, task);
     }
 }
