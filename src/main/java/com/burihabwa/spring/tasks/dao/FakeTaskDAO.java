@@ -29,4 +29,13 @@ public class FakeTaskDAO implements TaskDAO {
     public List<Task> list() {
         return new ArrayList<>(tasks.values());
     }
+
+    @Override
+    public Task delete(UUID id) {
+        Task task = tasks.remove(id);
+        if (task == null) {
+            throw new NoSuchElementException("Cannot find task " + id);
+        }
+        return task;
+    }
 }

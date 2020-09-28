@@ -11,4 +11,6 @@ public interface TaskDAO {
     public Task get(UUID id);
 
     public List<Task> list();
+
+    Task delete(UUID id);
 }

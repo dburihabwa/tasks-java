@@ -29,4 +29,8 @@ public class TaskService {
     public List<Task> list() {
         return this.taskDao.list();
     }
+
+    public Task delete(UUID id) {
+        return this.taskDao.delete(id);
+    }
 }

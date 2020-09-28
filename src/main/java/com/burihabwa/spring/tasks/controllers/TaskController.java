@@ -35,6 +35,16 @@ public class TaskController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public Task delete(@PathVariable String id) {
+        try {
+            return this.service.delete(UUID.fromString(id));
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
+        }
+    }
+
+
     @GetMapping
     public List<Task> list() {
         return this.service.list();
