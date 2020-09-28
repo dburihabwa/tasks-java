@@ -1,40 +1,18 @@
 package com.burihabwa.spring.tasks.service;
 
-import com.burihabwa.spring.tasks.dao.TaskDAO;
 import com.burihabwa.spring.tasks.models.Task;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
-public class TaskService {
-    private TaskDAO taskDao;
+public interface TaskService {
+    Task add(Task task);
 
-    @Autowired
-    public TaskService(@Qualifier("fakeDAO") TaskDAO taskDao) {
-        this.taskDao = taskDao;
-    }
+    Task get(UUID id);
 
-    public Task add(Task task) {
-        return this.taskDao.insert(task);
-    }
+    List<Task> list();
 
-    public Task get(UUID id) {
-        return this.taskDao.get(id);
-    }
+    Task delete(UUID id);
 
-    public List<Task> list() {
-        return this.taskDao.list();
-    }
-
-    public Task delete(UUID id) {
-        return this.taskDao.delete(id);
-    }
-
-    public Task update(UUID id, Task task) {
-        return this.taskDao.update(id, task);
-    }
+    Task update(UUID id, Task task);
 }
