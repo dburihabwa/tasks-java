@@ -19,7 +19,10 @@ public class FakeTaskDAO implements TaskDAO {
 
     @Override
     public Task get(UUID id) {
-        return tasks.get(id);
+        if (tasks.containsKey(id)) {
+            return tasks.get(id);
+        }
+        throw new NoSuchElementException("Cannot find task " + id);
     }
 
     @Override
