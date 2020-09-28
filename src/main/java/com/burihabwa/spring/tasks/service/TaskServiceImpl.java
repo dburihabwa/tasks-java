@@ -18,8 +18,15 @@ public class TaskServiceImpl implements TaskService {
         this.taskDao = taskDao;
     }
 
+    private static boolean hasValidDates(Task task) {
+        return !task.getFinish().isBefore(task.getStart());
+    }
+
     @Override
     public Task add(Task task) {
+        if (!hasValidDates(task)) {
+            throw new IllegalArgumentException("Task finishes before it starts");
+        }
         return this.taskDao.insert(task);
     }
 
@@ -40,6 +47,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task update(UUID id, Task task) {
+        if (!hasValidDates(task)) {
+            throw new IllegalArgumentException("Task finishes before it starts");
+        }
         return this.taskDao.update(id, task);
     }
 }

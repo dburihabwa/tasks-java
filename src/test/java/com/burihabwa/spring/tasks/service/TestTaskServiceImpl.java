@@ -26,6 +26,16 @@ public class TestTaskServiceImpl {
         Assert.assertEquals(service.list().size(), 1);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddTaskWithFinishBeforeStart() {
+        TaskServiceImpl service = new TaskServiceImpl(new FakeTaskDAO());
+        Assert.assertEquals(service.list().size(), 0);
+        LocalDateTime start = LocalDateTime.now();
+        LocalDateTime finish = start.minusMinutes(1);
+        Task task = new Task(null, "title", "description", start, finish, false);
+        service.add(task);
+    }
+
     @Test
     public void testGetExistingTask() {
         TaskServiceImpl service = new TaskServiceImpl(new FakeTaskDAO());
@@ -74,5 +84,17 @@ public class TestTaskServiceImpl {
         TaskServiceImpl service = new TaskServiceImpl(new FakeTaskDAO());
         Task task = new Task(null, "existingTask", "description", LocalDateTime.now(), LocalDateTime.now(), false);
         service.update(UUID.randomUUID(), task);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateExistingTaskFinishingBeforeStart() {
+        TaskServiceImpl service = new TaskServiceImpl(new FakeTaskDAO());
+        Task task = new Task(null, "title", "description", LocalDateTime.now(),  LocalDateTime.now(), false);
+        Task newTask = service.add(task);
+        LocalDateTime start = LocalDateTime.now();
+        LocalDateTime finish = start.minusMinutes(1);
+        newTask.setStart(start);
+        newTask.setFinish(finish);
+        service.update(newTask.getId(), newTask);
     }
 }
