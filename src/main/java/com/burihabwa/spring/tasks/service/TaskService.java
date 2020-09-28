@@ -33,4 +33,8 @@ public class TaskService {
     public Task delete(UUID id) {
         return this.taskDao.delete(id);
     }
+
+    public Task update(UUID id, Task task) {
+        return this.taskDao.update(id, task);
+    }
 }

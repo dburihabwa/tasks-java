@@ -44,6 +44,15 @@ public class TaskController {
         }
     }
 
+    @PutMapping("/{id}")
+    public Task update(@PathVariable String id, @RequestBody Task task) {
+        try {
+            return this.service.update(UUID.fromString(id), task);
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
+        }
+    }
+
 
     @GetMapping
     public List<Task> list() {

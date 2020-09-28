@@ -13,4 +13,6 @@ public interface TaskDAO {
     public List<Task> list();
 
     Task delete(UUID id);
+
+    Task update(UUID id, Task task);
 }
