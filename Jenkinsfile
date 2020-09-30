@@ -4,13 +4,17 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                sh "mvn -version"
-                sh "mvn clean test"
+                sh "mvn clean build"
+            }
+        }
+        stage("Test") {
+            steps {
+                sh "mvn test"
             }
         }
     }
 
-    posts {
+    post {
         always {
             cleanWs()
         }
