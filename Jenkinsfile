@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image "maven:3.6.3-jdk-14"
-            label "docker"
-        }
-    }
+    agent any
 
     stages {
         stage("Build") {
