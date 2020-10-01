@@ -4,32 +4,33 @@ import com.burihabwa.spring.tasks.dao.FakeTaskDAO;
 import com.burihabwa.spring.tasks.models.Task;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+@SpringBootTest
 public class TestTaskServiceImpl {
     @Test
     public void testNoTask() {
         TaskServiceImpl service = new TaskServiceImpl(new FakeTaskDAO());
-        Assert.assertEquals(service.list().size(), 0);
+        Assert.assertEquals(0, service.list().size());
     }
 
     @Test
     public void testAddTask() {
         TaskServiceImpl service = new TaskServiceImpl(new FakeTaskDAO());
-        Assert.assertEquals(service.list().size(), 0);
+        Assert.assertEquals(0, service.list().size());
         Task task = new Task(null, "title", "description", LocalDateTime.now(), LocalDateTime.now(), false);
         Task newTask = service.add(task);
         Assert.assertNotNull(newTask.getId());
-        Assert.assertEquals(service.list().size(), 1);
+        Assert.assertEquals(1, service.list().size());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddTaskWithFinishBeforeStart() {
         TaskServiceImpl service = new TaskServiceImpl(new FakeTaskDAO());
-        Assert.assertEquals(service.list().size(), 0);
         LocalDateTime start = LocalDateTime.now();
         LocalDateTime finish = start.minusMinutes(1);
         Task task = new Task(null, "title", "description", start, finish, false);
@@ -55,10 +56,10 @@ public class TestTaskServiceImpl {
         TaskServiceImpl service = new TaskServiceImpl(new FakeTaskDAO());
         Task task = new Task(null, "existingTask", "description", LocalDateTime.now(), LocalDateTime.now(), false);
         Task newTask = service.add(task);
-        Assert.assertEquals(service.list().size(), 1);
+        Assert.assertEquals(1, service.list().size());
         Task deletedTask = service.delete(newTask.getId());
         Assert.assertEquals(deletedTask, newTask);
-        Assert.assertEquals(service.list().size(), 0);
+        Assert.assertEquals(0, service.list().size());
     }
 
     @Test(expected = NoSuchElementException.class)
