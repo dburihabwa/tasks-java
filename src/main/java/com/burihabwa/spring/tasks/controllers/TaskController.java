@@ -14,6 +14,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/task")
 public class TaskController {
+    public static final String ENTITY_NOT_FOUND_MESSAGE = "entity not found";
     private final TaskService service;
 
     @Autowired
@@ -31,7 +32,7 @@ public class TaskController {
         try {
             return this.service.get(UUID.fromString(id));
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ENTITY_NOT_FOUND_MESSAGE);
         }
     }
 
@@ -40,7 +41,7 @@ public class TaskController {
         try {
             return this.service.delete(UUID.fromString(id));
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ENTITY_NOT_FOUND_MESSAGE);
         }
     }
 
@@ -49,7 +50,7 @@ public class TaskController {
         try {
             return this.service.update(UUID.fromString(id), task);
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ENTITY_NOT_FOUND_MESSAGE);
         }
     }
 
