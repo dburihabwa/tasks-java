@@ -51,6 +51,7 @@ public class TaskRepository implements TaskDAO {
 
     @Override
     public Task insert(Task task) {
+        task.setId(UUID.randomUUID());
         logger.debug("Inserting task " + task.getId());
         collection.insertOne(toDocument(task));
         return task;
