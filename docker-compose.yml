@@ -11,3 +11,12 @@ services:
     image: mongo:4.4
     ports:
       - 27017:27017
+
+  mongo-frontend:
+    image: mongo-express
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+    ports:
+      - "8081:8081"
+    links:
+      - mongo
