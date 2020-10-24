@@ -14,7 +14,7 @@ public class TaskServiceImpl implements TaskService {
     private TaskDAO taskDao;
 
     @Autowired
-    public TaskServiceImpl(@Qualifier("fakeDAO") TaskDAO taskDao) {
+    public TaskServiceImpl(@Qualifier("mongoDAO") TaskDAO taskDao) {
         this.taskDao = taskDao;
     }
 

@@ -6,11 +6,13 @@ import com.mongodb.client.*;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
 
+@Repository("mongoDAO")
 public class TaskRepository implements TaskDAO {
     public static final String COLLECTION_NAME = "tasks";
     private Logger logger = LoggerFactory.getLogger("dao");
@@ -39,7 +41,7 @@ public class TaskRepository implements TaskDAO {
     }
 
     public TaskRepository() {
-        MongoClient client = MongoClients.create("mongodb://127.0.0.1:27017");
+        MongoClient client = MongoClients.create("mongodb://mongo:27017");
         MongoDatabase database = client.getDatabase(COLLECTION_NAME);
         if (database.getCollection(COLLECTION_NAME) == null) {
             database.createCollection(COLLECTION_NAME);
