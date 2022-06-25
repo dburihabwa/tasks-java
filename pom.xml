@@ -15,7 +15,7 @@
     <description>A simple task manager written in Java</description>
 
     <properties>
-        <java.version>14</java.version>
+        <java.version>17</java.version>
         <!-- sonarcloud settings -->
         <sonar.projectKey>dburihabwa_tasks-java</sonar.projectKey>
         <sonar.organization>dburihabwa</sonar.organization>

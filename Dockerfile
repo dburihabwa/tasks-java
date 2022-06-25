@@ -1,9 +1,9 @@
-FROM maven:3.6.3-jdk-14
+FROM maven:3.8.4-openjdk-17
 
 COPY . /usr/src/tasks-java
 WORKDIR /usr/src/tasks-java
 
-RUN mvn install
+RUN mvn clean install
 
 ENTRYPOINT ["mvn", "-X", "-q", "spring-boot:run"]
 
